@@ -1,0 +1,41 @@
+<div id="<%= dom_id board %>">
+  <p>
+    <strong>Email:</strong>
+    <%= board.email %>
+  </p>
+
+  <p>
+    <strong>Width:</strong>
+    <%= board.width %>
+  </p>
+
+  <p>
+    <strong>Height:</strong>
+    <%= board.height %>
+  </p>
+
+  <p>
+    <strong>Mine count:</strong>
+    <%= board.mine_count %>
+  </p>
+
+  <p>
+    <strong>Board name:</strong>
+    <%= board.board_name %>
+  </p>
+
+  <% if @board.mine_locations.present? %>
+    <p>
+      <strong>Mine Locations:</strong>
+      <ul>
+        <% @board.mine_locations.each do |location| %>
+          <li>
+            <%= location %>
+          </li>
+        <% end %>
+      </ul>
+    </p>
+  <% else %>
+    <p>No mines.</p>
+  <% end %>
+</div>
