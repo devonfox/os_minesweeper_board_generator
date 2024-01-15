@@ -22,7 +22,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_14_202213) do
     t.string "board_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "mine_locations", default: [], array: true
+    t.string "mine_locations"
   end
 
 end

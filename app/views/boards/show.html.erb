@@ -1,10 +1,12 @@
-<p style="color: green"><%= notice %></p>
+<div class="grid grid-cols-1">
 
-<%= render @board %>
+  <p style="color: green"><%= notice %></p>
 
-<div>
+  <%= render @board %>
   <%# link_to "Edit this board", edit_board_path(@board) %>
-  <%= link_to "Back to boards", boards_path %>
-
-  <%= button_to "Destroy this board", @board, method: :delete %>
+  <div class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4">
+    <%= link_to "Back to boards", boards_path %>
+  </div>
+  <div class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4">
+  <%= button_to "Debug: Delete this board", @board, method: :delete %>
 </div>

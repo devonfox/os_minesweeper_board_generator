@@ -23,6 +23,8 @@ class BoardsController < ApplicationController
   def create
     @board = Board.new(board_params)
 
+    generate_board
+
     respond_to do |format|
       if @board.save
         format.html { redirect_to board_url(@board), notice: "Board was successfully created." }
@@ -57,14 +59,36 @@ class BoardsController < ApplicationController
     end
   end
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_board
       @board = Board.find(params[:id])
     end
 
+    def generate_board
+      width = @board.width
+      height = @board.height
+      mine_count = @board.mine_count
+      board_array = Array.new(height) { Array.new(width, 0) }
+    
+      mine_count.times do
+        row = rand(height)
+        col = rand(width)
+    
+        while board_array[row][col] == 1
+          row = rand(height)
+          col = rand(width)
+        end
+    
+        board_array[row][col] = 1
+      end
+
+      @board.mine_locations = board_array
+    end
+
     # Only allow a list of trusted parameters through.
     def board_params
-      params.require(:board).permit(:email, :width, :height, :mine_count, :board_name)
+      params.require(:board).permit(:email, :width, :height, :mine_count, :board_name, :mine_locations)
     end
 end
