@@ -13,6 +13,8 @@ class BoardsController < ApplicationController
   # GET /boards/new
   def new
     @board = Board.new
+    @recent_boards = Board.order(created_at: :desc).limit(10)
+    
   end
 
   # GET /boards/1/edit
@@ -22,6 +24,22 @@ class BoardsController < ApplicationController
   # POST /boards or /boards.json
   def create
     @board = Board.new(board_params)
+
+    if @board.width <= 0 || @board.height <= 0 || @board.mine_count <= 0
+      respond_to do |format|
+        format.html { render :new, status: :unprocessable_entity, notice: "Make sure the width, height, and mine count are all greater than zero." }
+        format.json { render json: { error: "Make sure the width, height, and mine count are all greater than zero." }, status: :unprocessable_entity }
+      end
+      return
+    end
+  
+    if @board.mine_count > @board.width * @board.height
+      respond_to do |format|
+        format.html { render :new, status: :unprocessable_entity, notice: "Make sure mine count is less than total cell count" }
+        format.json { render json: { error: "Make sure mine count is less than total cell count" }, status: :unprocessable_entity }
+      end
+      return
+    end
 
     generate_board
 

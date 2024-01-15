@@ -1,37 +1,49 @@
 <div id="<%= dom_id board %>" class="grid grid-cols-1">
-  <p>
+  <div>
     <strong>Email:</strong>
     <%= board.email %>
-  </p>
+  </div>
 
-  <p>
+  <div>
     <strong>Width:</strong>
     <%= board.width %>
-  </p>
+  </div>
 
-  <p>
+  <div>
     <strong>Height:</strong>
     <%= board.height %>
-  </p>
+  </div>
 
-  <p>
+  <div>
     <strong>Mine count:</strong>
     <%= board.mine_count %>
-  </p>
+  </div>
 
-  <p>
+  <div>
     <strong>Board name:</strong>
     <%= board.board_name %>
-  </p>
+  </div>
 
-  <p>
-    <strong>Board:</strong>
-    <ul>
-      <% @board.mine_locations.each do |location| %>
-          <%= location %>
-          <br>
-      <% end %>
-    </ul>
-  </p>
- 
+
+<div class="font-bold mb-4">Board:</div>
 </div>
+<div>
+  <% @board.mine_locations.each do |location| %>
+  <div>
+    <% location.each do |cell| %>
+      <% if cell == 1 %>
+          💣
+      <% else %>
+          ◻️
+      <% end %>
+    <% end %>
+  </div>
+  <% end %>
+</div>
+
+
+
+
+
+ 
+
