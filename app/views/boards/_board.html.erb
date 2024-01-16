@@ -1,33 +1,8 @@
-<div id="<%= dom_id board %>" class="grid grid-cols-1">
-  <div>
-    <strong>Email:</strong>
-    <%= board.email %>
-  </div>
-
-  <div>
-    <strong>Width:</strong>
-    <%= board.width %>
-  </div>
-
-  <div>
-    <strong>Height:</strong>
-    <%= board.height %>
-  </div>
-
-  <div>
-    <strong>Mine count:</strong>
-    <%= board.mine_count %>
-  </div>
-
-  <div>
-    <strong>Board name:</strong>
-    <%= board.board_name %>
-  </div>
-
-
-<div class="font-bold mb-4">Board:</div>
+<div id="<%= dom_id board %>">
+    Board: <%= board.board_name %>
+     by <%= board.email %>
 </div>
-<div>
+<div class="mt-2">
   <% @board.mine_locations.each do |location| %>
   <div>
     <% location.each do |cell| %>

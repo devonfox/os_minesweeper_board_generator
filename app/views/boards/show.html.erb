@@ -1,12 +1,6 @@
 <div class="grid grid-cols-1">
-
   <p style="color: green"><%= notice %></p>
-
   <%= render @board %>
-  <%# link_to "Edit this board", edit_board_path(@board) %>
-  <div class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4 sm:w-1/4">
-    <%= link_to "Back to boards", boards_path %>
+  <div>
+    <%= link_to "Back to Home", home_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline my-4 inline-block" %>
   </div>
-  <%# <div class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4"> %>
-    <%# <%= button_to "Debug: Delete this board", @board, method: :delete %> 
-  <%# </div> %>

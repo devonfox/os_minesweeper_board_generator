@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   root "boards#new"
 
   resources :boards
+
+  get 'home', to: 'boards#home', as: 'home'
 end

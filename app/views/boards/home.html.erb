@@ -1,16 +1,18 @@
 <div class="grid grid-cols-1">
   <p style="color: green"><%= notice %></p>
-  <h1 class="text-2xl font-bold underline pb-5">All Minesweeper Boards</h1>
-  <div id="boards">
-    <ul class="list-disc list-inside">
-      <% @boards.each do |board| %>
+  <h1 class="text-2xl font-bold underline pb-5">Minesweeper Home</h1>
+  <div>
+    <ul class="mt-4 mb-2 list-disc list-inside">
+      <div class="font-bold">Last 10 Generated Boards:</div>
+      <% @recent_boards&.each do |board| %>
         <li>
           <span class="italic"><%= link_to "#{board.board_name}", board, class: "link underline"%></span>
           <span> by <%= board.email %></span>
           <span> at <%= board.created_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %e, %Y %I:%M %p") %> </span>
         </li>
       <% end %>
+      <li>
+        <%= link_to "View All Generated Boards", boards_path, class: "italic underline"%>
+      </li>
     </ul>
   </div>
-</div>
-<%= link_to "Back to Home", home_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4 inline-block"%>

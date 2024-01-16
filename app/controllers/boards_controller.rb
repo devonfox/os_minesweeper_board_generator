@@ -6,15 +6,18 @@ class BoardsController < ApplicationController
     @boards = Board.all
   end
 
+  def home
+    @boards = Board.all
+    @recent_boards = Board.order(created_at: :desc).limit(10)
+  end
+
   # GET /boards/1 or /boards/1.json
   def show
   end
 
   # GET /boards/new
   def new
-    @board = Board.new
-    @recent_boards = Board.order(created_at: :desc).limit(10)
-    
+    @board = Board.new  
   end
 
   # GET /boards/1/edit
