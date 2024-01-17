@@ -1,16 +1,20 @@
 <div class="grid grid-cols-1">
   <p style="color: green"><%= notice %></p>
   <h1 class="text-2xl font-bold underline pb-5">All Minesweeper Boards</h1>
-  <div id="boards">
-    <ul class="list-disc list-inside">
-      <% @boards.each do |board| %>
-        <li>
-          <span class="italic"><%= link_to "#{board.board_name}", board, class: "link underline"%></span>
-          <span> by <%= board.email %></span>
-          <span> at <%= board.created_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %e, %Y %I:%M %p") %> </span>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+  <% if @boards.any? %>
+    <div>
+      <ul class="list-disc list-inside">
+        <% @boards.each do |board| %>
+          <li>
+            <span class="italic"><%= link_to "#{board.board_name}", board, class: "link underline"%></span>
+            <span> by <%= board.email %></span>
+            <span> at <%= board.created_at.in_time_zone("Pacific Time (US & Canada)").strftime("%B %e, %Y %I:%M %p") %> </span>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% else %>
+    <p>No Boards Yet</p>
+  <% end %>
 </div>
-<%= link_to "Back to Home", home_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4 inline-block"%>
+<%= link_to "Back to Home", home_path, class: "bg-black hover:bg-gray-200 text-white hover:text-black font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline mt-4 inline-block"%>

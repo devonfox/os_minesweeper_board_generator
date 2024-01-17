@@ -1,24 +1,17 @@
-# README
+# Minesweeper Board Generator
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This Ruby on Rails app creates randomized Minesweeper boards of custom size (x * y), stored in a PostgreSQL database for later retrieval and display.
 
-Things you may want to cover:
+Ruby version: *3.3.0*
 
-* Ruby version
+To create the database:
+```
+rails db:create
+```
 
-* System dependencies
+To initialize the schema:
+```
+rails db:migrate
+```
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+TODO: Deployment instructions

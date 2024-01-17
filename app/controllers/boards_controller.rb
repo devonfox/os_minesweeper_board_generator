@@ -13,6 +13,8 @@ class BoardsController < ApplicationController
 
   # GET /boards/1 or /boards/1.json
   def show
+    @board = Board.find(params[:id])
+    @mine_board = make_board
   end
 
   # GET /boards/new
@@ -27,24 +29,13 @@ class BoardsController < ApplicationController
   # POST /boards or /boards.json
   def create
     @board = Board.new(board_params)
-
-    if @board.width <= 0 || @board.height <= 0 || @board.mine_count <= 0
-      respond_to do |format|
-        format.html { render :new, status: :unprocessable_entity, notice: "Make sure the width, height, and mine count are all greater than zero." }
-        format.json { render json: { error: "Make sure the width, height, and mine count are all greater than zero." }, status: :unprocessable_entity }
-      end
-      return
-    end
   
-    if @board.mine_count > @board.width * @board.height
-      respond_to do |format|
-        format.html { render :new, status: :unprocessable_entity, notice: "Make sure mine count is less than total cell count" }
-        format.json { render json: { error: "Make sure mine count is less than total cell count" }, status: :unprocessable_entity }
+    if !@board.mine_count.nil? && !@board.width.nil? && !@board.height.nil?
+      if @board.mine_count <= @board.width * @board.height
+        # only generating if my active record validations work in the model
+        generate_board
       end
-      return
     end
-
-    generate_board
 
     respond_to do |format|
       if @board.save
@@ -56,6 +47,7 @@ class BoardsController < ApplicationController
       end
     end
   end
+  
 
   # PATCH/PUT /boards/1 or /boards/1.json
   def update
@@ -80,7 +72,6 @@ class BoardsController < ApplicationController
     end
   end
 
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_board
@@ -91,25 +82,31 @@ class BoardsController < ApplicationController
       width = @board.width
       height = @board.height
       mine_count = @board.mine_count
-      board_array = Array.new(height) { Array.new(width, 0) }
-    
-      mine_count.times do
-        row = rand(height)
-        col = rand(width)
-    
-        while board_array[row][col] == 1
-          row = rand(height)
-          col = rand(width)
-        end
-    
-        board_array[row][col] = 1
+      mine_locations = Set.new
+      while mine_locations.length < mine_count
+        point = [rand(height), rand(width)]
+        mine_locations.add(point)
       end
-
-      @board.mine_locations = board_array
+        
+      @board.mine_locations = mine_locations
     end
 
+    def make_board
+      render_board = Array.new(@board.height) { Array.new(@board.width, 0) }
+
+      @board.mine_locations.each do |x, y|
+          render_board[y][x] = 1
+      end
+    
+      return render_board
+    end
+    
+
+
+    
     # Only allow a list of trusted parameters through.
     def board_params
       params.require(:board).permit(:email, :width, :height, :mine_count, :board_name, :mine_locations)
     end
 end
+

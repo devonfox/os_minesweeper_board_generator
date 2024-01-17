@@ -1,9 +1,10 @@
-<div id="<%= dom_id board %>">
-    Board: <%= board.board_name %>
-     by <%= board.email %>
+<div id="<%= dom_id board%>">
+  Board: 
+  <span class="font-bold italic"><%= board.board_name %></span>
+  by <%= board.email %>
 </div>
-<div class="mt-2">
-  <% @board.mine_locations.each do |location| %>
+<div class="mt-2 whitespace-nowrap overflow-x-auto">
+  <% mine_board.each do |location| %>
   <div>
     <% location.each do |cell| %>
       <% if cell == 1 %>
@@ -15,10 +16,3 @@
   </div>
   <% end %>
 </div>
-
-
-
-
-
- 
-
