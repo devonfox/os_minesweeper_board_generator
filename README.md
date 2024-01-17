@@ -31,4 +31,6 @@ $ rails db:migrate
 
 ## Deployment
 
+Deployed currently at: [https://minesweeper-dfox-3afb1ffb89ce.herokuapp.com/](https://minesweeper-dfox-3afb1ffb89ce.herokuapp.com/)
+
 To deploy on Heroku, I recommend following [this guide](https://devcenter.heroku.com/articles/getting-started-with-rails7#local-setup) on the Heroku site and using Heroku CLI.
